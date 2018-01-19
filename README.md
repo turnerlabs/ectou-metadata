@@ -20,7 +20,7 @@ ectou_metadata [--host host] [--port port] [--role-arn role_arn]
 Docker
 ------
 
-```
+```yaml
 version: "2"
 
 services:
