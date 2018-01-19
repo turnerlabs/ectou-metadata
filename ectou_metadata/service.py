@@ -210,7 +210,7 @@ def main():
     args = parser.parse_args()
 
     global _role_arn
-    _role_arn = args.role_arn
+    _role_arn = os.environ['ROLE']
 
     global _conf_dir
     _conf_dir = args.conf_dir
