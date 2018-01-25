@@ -3,6 +3,9 @@ ectou-metadata
 
 Yet another EC2 instance metadata mocking service.
 
+[![Docker Repository on Quay](https://quay.io/repository/turner/ectou-metadata/status?token=f4f31852-6ad5-4f13-ab11-0783dc8bab44 "Docker Repository on Quay")](https://quay.io/repository/turner/ectou-metadata)
+
+
 Goals
 -----
 
@@ -29,13 +32,20 @@ services:
     ports:
     - 80:3000
 
-  proxy:
-    image: ectou-metadata
+# aws role support 
+
+  role:
+    image: quay.io/turner/ectou-metadata
     ports:
     - 9000:80
     environment:
+
+      # the role you want your container to assume
       ROLE: arn:aws:iam::123456789:role/my-role
-      AWS_PROFILE: cred-source
+
+      # the local profile you want to use to assume the role
+      AWS_PROFILE: my-profile
+
     volumes:
     - $HOME/.aws/credentials:/root/.aws/credentials:ro
     networks:
@@ -48,7 +58,8 @@ networks:
     ipam:
      config:
        - subnet: 169.254.169.0/16
-         gateway: 169.254.169.1
+         gateway: 169.254.169.1    
+
 ```
 
 
